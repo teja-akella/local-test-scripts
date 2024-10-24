@@ -8,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -17,8 +18,13 @@ from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
 
 @pytest.fixture(scope="session")
 def setup():
+	chrome_options = Options()
+	chrome_options.add_argument("--headless")  # Run in headless mode
+	chrome_options.add_argument("--disable-gpu")  # Disable GPU usage (usually recommended)
+	chrome_options.add_argument("--window-size=1920,1080")
+
 	# Setup: Initialize the WebDriver and open the browser
-	driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+	driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 	driver.maximize_window()
 	yield driver
 	# Teardown: Close the browser after the test
