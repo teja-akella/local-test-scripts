@@ -20,8 +20,9 @@ from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
 def setup():
 	chrome_options = Options()
 	chrome_options.add_argument("--headless")  # Run in headless mode
-	chrome_options.add_argument("--disable-gpu")  # Disable GPU usage (usually recommended)
-	chrome_options.add_argument("--window-size=1920,1080")
+	chrome_options.add_argument('--remote-debugging-pipe')
+	# chrome_options.add_argument("--disable-gpu")  # Disable GPU usage (usually recommended)
+	# chrome_options.add_argument("--window-size=1920,1080")
 
 	# Setup: Initialize the WebDriver and open the browser
 	driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
