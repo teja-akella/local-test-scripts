@@ -19,8 +19,8 @@ from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
 @pytest.fixture(scope="session")
 def setup():
 	chrome_options = Options()
-	chrome_options.add_argument("--headless")  # Run in headless mode
 	chrome_options.add_argument('--no-sandbox')
+	chrome_options.add_argument("--headless")  # Run in headless mode
 	# chrome_options.add_argument("--disable-gpu")  # Disable GPU usage (usually recommended)
 	# chrome_options.add_argument("--window-size=1920,1080")
 
