@@ -25,7 +25,7 @@ def setup():
 	# chrome_options.add_argument("--window-size=1920,1080")
 
 	# Setup: Initialize the WebDriver and open the browser
-	driver = webdriver.Chrome('/snap/bin/chromium.chromedriver', options=chrome_options)
+	driver = webdriver.Chrome(options=chrome_options)
 	driver.maximize_window()
 	yield driver
 	# Teardown: Close the browser after the test
