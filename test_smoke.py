@@ -104,7 +104,9 @@ def test_query_copilot(setup):
 	copilot_input = driver.find_element(By.XPATH, "//textarea")
 	copilot_input.send_keys("Please help me create an MSK exercise routine") # real query
 	copilot_input.send_keys(Keys.ENTER)
-	time.sleep(10)
+	wait.until(
+		EC.invisibility_of_element_located((By.XPATH, "//span[@class='ant-spin-dot ant-spin-dot-spin']"))
+	)
 	response_elems = driver.find_elements(By.XPATH, "(//div[@class='flex flex-col gap-2'])[last()]/child::*")
 	char_count = 0
 	for i in response_elems:
