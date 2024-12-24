@@ -56,6 +56,7 @@ def test_upload_doc(setup):
 		EC.presence_of_element_located((By.XPATH, "//span[contains(@class, 'check-circle')]"))
 	)
 	check.not_equal(check_icon, None, "Successful document upload snackbar did not pop up.")
+	check_icon_kb = None
 	try:
 		check_icon_kb = wait.until(
 			EC.presence_of_element_located((By.XPATH, "//span[text()='Public Beta Launch Test Cases - requirements import structure.pdf']//following::img[@alt='failed icon']"))
@@ -81,6 +82,7 @@ def test_upload_url(setup):
 		EC.presence_of_element_located((By.XPATH, "//span[contains(@class, 'check-circle')]"))
 	)
 	check.not_equal(check_icon_snackbar, None, "Successful URL upload snackbar did not pop up.")
+	check_icon_kb = None
 	try:
 		check_icon_kb = wait.until(
 			EC.presence_of_element_located((By.XPATH, "//span[text()='Public Beta Launch Test Cases - requirements import structure.pdf']//following::img[@alt='failed icon']"))
