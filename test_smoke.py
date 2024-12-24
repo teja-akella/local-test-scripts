@@ -48,7 +48,7 @@ def test_create_copilot(setup, name="Test Copilot"):
 def test_upload_doc(setup):
 	driver = setup
 	wait = WebDriverWait(driver, timeout=15)
-	upload_file = "/var/lib/jenkins/workspace/101GenAi_test_docs/Public Beta Launch Test Cases - requirements import structure.pdf"
+	upload_file = "/var/lib/jenkins/workspace/Public Beta Launch Test Cases - requirements import structure.pdf"
 	ActionChains(driver).scroll_by_amount(0, 1000).perform()
 	file_input = driver.find_element(By.XPATH, "(//input[@type='file'])[last()]")
 	file_input.send_keys(upload_file)
