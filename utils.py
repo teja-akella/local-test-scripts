@@ -34,7 +34,7 @@ def login(setup):
 	
 	# Step 1: Navigate to the website
 	driver.get("https://test.app.101gen.ai/login")  
-	wait = WebDriverWait(driver, timeout=10)
+	wait = WebDriverWait(driver, timeout=30)
 	
 	# Step 2: Locate and interact with the form fields
 	email_field = driver.find_element(By.XPATH, "//input[@name='username']")  
