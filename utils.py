@@ -18,7 +18,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 def setup():
 	chrome_options = Options()
 	chrome_options.add_argument('--no-sandbox')
-	chrome_options.add_argument("--headless")  # Run in headless mode
+	# chrome_options.add_argument("--headless")  # Run in headless mode
 	# chrome_options.add_argument("--disable-gpu")  # Disable GPU usage (usually recommended)
 	# chrome_options.add_argument("--window-size=1920,1080")
 
@@ -41,8 +41,8 @@ def login(setup):
 	password_field = driver.find_element(By.XPATH, "//input[@name='password']")  
 	
 	# Step 3: Input data into the fields
-	email_field.send_keys("root@101gen.ai")
-	password_field.send_keys("Sdi3FdrDgAj2pKv")
+	email_field.send_keys("qa_midaccess@101gen.ai")
+	password_field.send_keys("QAmidaccess123#")
 
 	# Step 4: Submit the form
 	submit_button = wait.until(
@@ -51,4 +51,18 @@ def login(setup):
 	submit_button.click()
 	wait.until(EC.presence_of_element_located((By.XPATH, "//div[text()='Welcome to 101GenAI!']")))
 	assert driver.current_url == "https://test.app.101gen.ai/dashboard", "Did not reach the correct URL."
+	time.sleep(5)
+
+def open_copilot(setup, name='Test Copilot'):
+	# opens the copilot with the 'name' parameter on the dashboard.
+	# this function assumes user is already logged in and at the dashboard.
+	driver = setup
+	wait = WebDriverWait(driver, timeout=10)
+	copilot_xpath = "//h3[text()='"+name+"']/ancestor::div[contains(@class, 'relative')]/following-sibling::div[@class='cursor-pointer']"
+	open_copilot = wait.until(
+		EC.element_to_be_clickable((By.XPATH, copilot_xpath))
+	)
+	open_copilot.click()
+
+	wait.until(EC.presence_of_element_located((By.XPATH, "//h3[text()='Skills']")))
 	time.sleep(5)
