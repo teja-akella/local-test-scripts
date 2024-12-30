@@ -3,6 +3,7 @@
 import pytest
 import time
 import os
+import yaml
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -18,7 +19,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 def setup():
 	chrome_options = Options()
 	chrome_options.add_argument('--no-sandbox')
-	chrome_options.add_argument("--headless")  # Run in headless mode
+	# chrome_options.add_argument("--headless")  # Run in headless mode
 	# chrome_options.add_argument("--disable-gpu")  # Disable GPU usage (usually recommended)
 	# chrome_options.add_argument("--window-size=1920,1080")
 
@@ -31,7 +32,9 @@ def setup():
 
 def login(setup):
 	driver = setup
-	
+	with open('credentials.yaml', 'r') as file:
+		creds = yaml.safe_load(file)
+
 	# Step 1: Navigate to the website
 	driver.get("https://test.app.101gen.ai/login")  
 	wait = WebDriverWait(driver, timeout=30)
@@ -41,8 +44,8 @@ def login(setup):
 	password_field = driver.find_element(By.XPATH, "//input[@name='password']")  
 	
 	# Step 3: Input data into the fields
-	email_field.send_keys("qa_midaccess@101gen.ai")
-	password_field.send_keys("QAmidaccess123#")
+	email_field.send_keys(creds['qa_mid_username'])
+	password_field.send_keys(creds['qa_mid_password'])
 
 	# Step 4: Submit the form
 	submit_button = wait.until(
