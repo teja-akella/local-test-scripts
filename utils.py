@@ -32,7 +32,7 @@ def setup():
 
 def login(setup):
 	driver = setup
-	with open('credentials.yaml', 'r') as file:
+	with open('/var/lib/jenkins/workspace/credentials.yaml', 'r') as file:
 		creds = yaml.safe_load(file)
 
 	# Step 1: Navigate to the website
