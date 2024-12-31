@@ -7,7 +7,7 @@ import yaml
 from pytest_check import check
 
 def test_authentication():
-	with open('/var/lib/jenkins/workspace/credentials.yaml', 'r') as file:
+	with open('../credentials.yaml', 'r') as file:
 		creds = yaml.safe_load(file)
 	# Bearer Token Request
 	# URL and headers 
