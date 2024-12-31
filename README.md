@@ -5,4 +5,4 @@ They are run on [this jenkins server](https://dev.jenkins.101gen.ai/). Please ta
 
 ## Required to run locally:
 
-`credentials.yaml`: Fill out the required fields in credentials-template.yaml, and rename.
+`credentials.yaml`: Fill out the required fields in credentials-template.yaml, and rename. Please ensure it is placed in the correct directory.
