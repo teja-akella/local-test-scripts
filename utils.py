@@ -4,6 +4,7 @@ import pytest
 import time
 import os
 import yaml
+import requests
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -69,3 +70,29 @@ def open_copilot(setup, name='Test Copilot'):
 
 	wait.until(EC.presence_of_element_located((By.XPATH, "//h3[text()='Skills']")))
 	time.sleep(5)
+
+@pytest.fixture(scope="session")
+def get_bearer_token():
+	with open('../credentials.yaml', 'r') as file:
+		creds = yaml.safe_load(file)
+	# Bearer Token Request
+	# URL and headers 
+	url = "https://beta.api.101gen.ai/client/token"
+	headers = {
+		"content-type": "application/json"
+	}
+
+	# Payload
+	data = {
+		"client_id": creds['client_id'],
+		"client_secret": creds["client_secret"]
+	}
+
+	# Send and check request
+	print("\n\nSending bearer token request...")
+	response = requests.post(url, json=data, headers=headers)
+	assert not 400 <= response.status_code <= 499, (f"Client error: {response.status_code} - {response.text}")
+	assert not 500 <= response.status_code <= 599, (f"Server error: {response.status_code} - {response.text}")
+	print(f"Status Code: {response.status_code}")
+
+	return response.json()['access_token']

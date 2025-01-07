@@ -1,38 +1,19 @@
 # test_authentication.py
-
+# TODO: Run test every 30min, ping on slack if fail
 import pytest
 import requests
 import yaml
 
 from pytest_check import check
+from utils import get_bearer_token
 
-def test_authentication():
-	with open('../credentials.yaml', 'r') as file:
-		creds = yaml.safe_load(file)
-	# Bearer Token Request
-	# URL and headers 
-	url = "https://beta.api.101gen.ai/client/token"
-	headers = {
-		"content-type": "application/json"
-	}
+def test_authentication(get_bearer_token):
 
-	# Payload
-	data = {
-		"client_id": creds['client_id'],
-		"client_secret": creds["client_secret"]
-	}
-
-	# Send and check request
-	print("\n\nSending bearer token request...")
-	response = requests.post(url, json=data, headers=headers)
-	assert not 400 <= response.status_code <= 499, (f"Client error: {response.status_code} - {response.text}")
-	assert not 500 <= response.status_code <= 599, (f"Server error: {response.status_code} - {response.text}")
-	print(f"Status Code: {response.status_code}")
-
-	bearer_token = response.json()['access_token']
+	bearer_token = get_bearer_token
 
 	# POST Request to chat with Bearer Token
 	# URL and headers
+
 	url = "https://beta.api.101gen.ai/chat"
 
 	headers = {
