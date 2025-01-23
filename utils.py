@@ -211,7 +211,7 @@ def upload_file(get_bearer_token, project_id="e4cc55c9-305d-478f-b285-96d436229f
 	}
 
 	# Payload
-	upload_file_path = "/Users/yashdua/Documents/101GenAi_test_docs/Public Beta Launch Test Cases - requirements import structure.pdf"#"/var/lib/jenkins/workspace/Public Beta Launch Test Cases - requirements import structure.pdf"
+	upload_file_path = "/var/lib/jenkins/workspace/Public Beta Launch Test Cases - requirements import structure.pdf"
 
 	files = {
     	"files": open(upload_file_path, "rb")
