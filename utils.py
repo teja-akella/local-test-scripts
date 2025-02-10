@@ -107,7 +107,6 @@ def get_bearer_token(request):
 	print("Request Details:")
 	print(f"URL: {url}")
 	print(f"Headers: {json.dumps(headers, indent=2)}")
-	print(f"data: {data}")
 	# Send and check request
 	print("\n\nSending bearer token request...")
 	response = requests.post(url, json=data, headers=headers)
