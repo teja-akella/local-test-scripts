@@ -199,38 +199,6 @@ def get_file_dataset_id(get_bearer_token, filename="Public Beta Launch Test Case
 			return i['id']
 	return None
 
-def upload_file(get_bearer_token, project_id="e4cc55c9-305d-478f-b285-96d436229fba"):
-	# upload file
-	bearer_token = get_bearer_token
-
-	url = "https://ea.api.101gen.ai/copilots/"+project_id+"/datasets"
-
-	headers = {
-		"Authorization": f"Bearer {bearer_token}"
-	}
-
-	# Payload
-	upload_file_path = "/var/lib/jenkins/workspace/Public Beta Launch Test Cases - requirements import structure.pdf"
-
-	files = {
-    	"files": open(upload_file_path, "rb")
-	}
-
-	# Send POST request
-	print("\nSending POST request to "+url)
-
-	start_time = time.time()
-	response = requests.post(url, headers=headers, files=files)
-	end_time = time.time()
-	duration = end_time - start_time
-	print(f"API Response Time: {duration:.2f} seconds")
-	check.less(duration, 10, "Uploading file took longer than 10 seconds.")
-
-	assert not 400 <= response.status_code <= 499, (f"Client error: {response.status_code} - {response.text}")
-	assert not 500 <= response.status_code <= 599, (f"Server error: {response.status_code} - {response.text}")
-	print("Upload successful!")
-	#print(f"\n{response.json()['ingest_job_id']}")
-
 def delete_file(get_bearer_token, file_dataset_id="", project_id="e4cc55c9-305d-478f-b285-96d436229fba"):
 	# upload file
 
@@ -247,7 +215,7 @@ def delete_file(get_bearer_token, file_dataset_id="", project_id="e4cc55c9-305d-
 	if file_dataset_id is None:
 		file_dataset_id = get_file_dataset_id(get_bearer_token, filename="Public Beta Launch Test Cases - requirements import structure.pdf", project_id="e4cc55c9-305d-478f-b285-96d436229fba")
 
-	print("file_dataset_id: "+file_dataset_id)
+	print("file_dataset_id: "+str(file_dataset_id))
 	data = {
 		"dataset_ids": [file_dataset_id]
 	}
