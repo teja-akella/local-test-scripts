@@ -111,7 +111,7 @@ def create_agent_api(bearer_token, platform="ea", org_id="d101d9e4-ce1d-41c9-9ef
 	assert not 500 <= response.status_code <= 599, (f"Server error: {response.status_code} - {response.text}")
 
 	print("AI Agent saved!")
-	#return response.json()['copilot_id']
+	return response.json()['copilot_id']
 
 
 def upload_file_api(bearer_token, copilot_id,  platform="ea", filepath="/var/lib/jenkins/workspace/Public Beta Launch Test Cases - requirements import structure.pdf"):
