@@ -13,8 +13,6 @@ from core_functions import create_agent_api, upload_file_api, upload_url_api, qu
 def shared_data():
     data = {}  # Dictionary to store values
     return data
-    # copilot_id = ''
-    # return copilot_id
 
 @pytest.mark.parametrize(
     "get_bearer_token",

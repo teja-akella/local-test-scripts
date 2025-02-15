@@ -8,7 +8,7 @@ from pytest_check import check
 
 def create_agent_api(bearer_token, platform="ea", org_id="d101d9e4-ce1d-41c9-9ef7-001f0673a4a1", message=""):
 	'''
-	Create a agent using an API call.
+	Create an agent using an API call.
 
 	Parameters:
 	bearer_token: authentication token
@@ -16,7 +16,7 @@ def create_agent_api(bearer_token, platform="ea", org_id="d101d9e4-ce1d-41c9-9ef
 	org_id: id for organization the agent will be generated in
 	message: agent description
 
-	Returns:
+	(TODO) Returns:
 	project_id: id to specify agent
 	response_code: API response code
 	'''
@@ -111,7 +111,7 @@ def create_agent_api(bearer_token, platform="ea", org_id="d101d9e4-ce1d-41c9-9ef
 	assert not 500 <= response.status_code <= 599, (f"Server error: {response.status_code} - {response.text}")
 
 	print("AI Agent saved!")
-	return response.json()['copilot_id']
+	#return response.json()['copilot_id']
 
 
 def upload_file_api(bearer_token, copilot_id,  platform="ea", filepath="/var/lib/jenkins/workspace/Public Beta Launch Test Cases - requirements import structure.pdf"):
@@ -119,12 +119,12 @@ def upload_file_api(bearer_token, copilot_id,  platform="ea", filepath="/var/lib
 	Upload a file to a agent using an API call.
 
 	Parameters:
-	platform: string specifying which platform agent will be made on (beta, test, ea)
 	bearer_token: authentication token
-	project_id: id to specify agent
+	copilot_id: copilot identifier
+	platform: string specifying which platform agent will be made on (beta, test, ea)
 	filepath: filepath for document
 
-	Returns:
+	(TODO) Returns:
 	response_code: API response code
 	'''
 	project_id = copilot_id
@@ -160,18 +160,17 @@ def upload_file_api(bearer_token, copilot_id,  platform="ea", filepath="/var/lib
 	assert not 500 <= response.status_code <= 599, (f"Server error: {response.status_code} - {response.text}")
 	print("Upload successful!")
 
-def upload_url_api(bearer_token, copilot_id, platform="test", upload_url="https://101gen.ai"):
+def upload_url_api(bearer_token, copilot_id, platform="ea", upload_url="https://101gen.ai"):
 	'''
 	Upload a URL to a agent using an API call.
 
 	Parameters:
-	platform: string specifying which platform agent will be made on (beta, test, ea)
-	copilot_id: 
 	bearer_token: authentication token
-	project_id: id to specify agent
-	url: URL to upload
+	copilot_id: copilot identifier
+	platform: string specifying which platform agent will be made on (beta, test, ea)
+	upload_url: URL to upload
 
-	Returns:
+	(TODO) Returns:
 	response_code: API response code
 	'''
 	project_id = copilot_id
@@ -203,12 +202,13 @@ def query_agent_api(bearer_token, copilot_id, platform="ea", query="What is a go
 	Send a query to a agent using an API call.
 
 	Parameters:
-	platform: string specifying which platform agent will be made on (beta, test, ea)
 	bearer_token: authentication token
-	project_id: id to specify agent
+	copilot_id: copilot identifier
+	platform: string specifying which platform agent will be made on (beta, test, ea)
 	query: query to be made
+	end_user_id: name of user posting the query
 
-	Returns:
+	(TODO) Returns:
 	response_text: text body of agent response
 	response_code: API response code
 	'''
@@ -242,14 +242,14 @@ def query_agent_api(bearer_token, copilot_id, platform="ea", query="What is a go
 
 def delete_agent_api(bearer_token, copilot_id, platform="ea"):
 	'''
-	Delete a agent using an API call.
+	Delete an agent using an API call.
 
 	Parameters:
-	platform: string specifying which platform agent will be made on (beta, test, ea)
 	bearer_token: authentication token
-	project_id: id to specify agent
-
-	Returns:
+	copilot_id: copilot identifier
+	platform: string specifying which platform agent will be made on (beta, test, ea)
+	
+	(TODO) Returns:
 	response_code: API response code
 	'''
 
