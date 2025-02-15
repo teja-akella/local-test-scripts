@@ -42,7 +42,7 @@ def test_create_agent(get_bearer_token, shared_data, name="Test agent"):
     ],
     indirect=True
 )
-def test_upload_doc(get_bearer_token, shared_data, filepath="/Users/yashdua/Documents/101GenAi_test_docs/Public Beta Launch Test Cases - requirements import structure.pdf"):
+def test_upload_doc(get_bearer_token, shared_data, filepath="/var/lib/jenkins/workspace/Public Beta Launch Test Cases - requirements import structure.pdf"):
 	upload_file_api(get_bearer_token, shared_data['copilot_id'], "ea", filepath)
 	
 @pytest.mark.parametrize(
