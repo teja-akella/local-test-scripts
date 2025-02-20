@@ -103,10 +103,6 @@ def get_bearer_token(request):
 	headers = {
 		"content-type": "application/json"
 	}
-
-	print("Request Details:")
-	print(f"URL: {url}")
-	print(f"Headers: {json.dumps(headers, indent=2)}")
 	# Send and check request
 	print("\n\nSending bearer token request...")
 	response = requests.post(url, json=data, headers=headers)
@@ -189,14 +185,47 @@ def get_file_dataset_id(get_bearer_token, filename="Public Beta Launch Test Case
 		"Authorization": f"Bearer {bearer_token}"
 	}
 
+	start_time = time.time()
 	response = requests.get(url, headers=headers)
+	end_time = time.time()
+	duration = end_time - start_time
+	print(f"Get Dataset API Response Time: {duration:.2f} seconds")
 	print("\nSending GET request to "+url)
 	assert not 400 <= response.status_code <= 499, (f"Client error: {response.status_code} - {response.text}")
 	assert not 500 <= response.status_code <= 599, (f"Server error: {response.status_code} - {response.text}")
 	print("Files received successfully..")
+	file_id = ""
+
+
+	# search for document in "Docs" list
 	for i in response.json()['docs']:
-		if i['name'] == filename:
+		if i['name'] == filename or filename in i['path']:
+			print("File finished uploading within the span of the last two API calls.")
+			file_id = i['id']
 			return i['id']
+	# Continue searching in "Processing" list if not found
+	if file_id == "":
+		for i in response.json()['processing']:
+			# if file is found here, resubmit API request to refresh list until file is found in "Docs" list
+			if filename in i['path']:
+				start_time = time.time()
+				is_processing = True
+				while is_processing:
+					response = requests.get(url, headers=headers)
+					for i in response.json()['docs']:
+						if i['name'] == filename or filename in i['path']:
+							end_time = time.time()
+							duration = end_time - start_time
+							print(f"Ingestion Time: {duration:.2f} seconds")
+							file_id = i['id']
+							return i['id']
+					end_time = time.time()
+					duration = end_time - start_time
+					print(f"Duration: {duration:.2f} seconds")
+					if duration > 600:
+						print("Document took more than 10 minutes to upload. Exiting.")
+						is_processing = False
+	print('Id not found.')
 	return None
 
 def delete_file(get_bearer_token, file_dataset_id="", project_id="e4cc55c9-305d-478f-b285-96d436229fba"):
@@ -213,7 +242,7 @@ def delete_file(get_bearer_token, file_dataset_id="", project_id="e4cc55c9-305d-
 	}
 
 	if file_dataset_id is None:
-		file_dataset_id = get_file_dataset_id(get_bearer_token, filename="Public Beta Launch Test Cases - requirements import structure.pdf", project_id="e4cc55c9-305d-478f-b285-96d436229fba")
+		file_dataset_id = get_file_dataset_id(get_bearer_token, filename="2024-02-23_yk_saxena_medical_report_handwritten_report.pdf", project_id="e4cc55c9-305d-478f-b285-96d436229fba")
 
 	print("file_dataset_id: "+str(file_dataset_id))
 	data = {
@@ -226,7 +255,7 @@ def delete_file(get_bearer_token, file_dataset_id="", project_id="e4cc55c9-305d-
 	response = requests.delete(url, headers=headers, json=data)
 	end_time = time.time()
 	duration = end_time - start_time
-	print(f"API Response Time: {duration:.2f} seconds")
+	print(f"Delete File API Response Time: {duration:.2f} seconds")
 	check.less(duration, 10, "Deleting file took longer than 10 seconds.")
 
 	assert not 400 <= response.status_code <= 499, (f"Client error: {response.status_code} - {response.text}")

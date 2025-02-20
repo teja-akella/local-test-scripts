@@ -20,7 +20,7 @@ from core_functions import upload_file_api
     indirect=True
 )
 def test_file_upload(get_bearer_token, project_id="e4cc55c9-305d-478f-b285-96d436229fba"):
-	upload_file_api(get_bearer_token, project_id, "ea", "/var/lib/jenkins/workspace/Public Beta Launch Test Cases - requirements import structure.pdf")
+	upload_file_api(get_bearer_token, project_id, "ea", "/Users/yashdua/Documents/101GenAi_test_docs/Public Beta Launch Test Cases - requirements import structure.pdf")
 
 @pytest.mark.parametrize(
     "get_bearer_token",
@@ -36,10 +36,5 @@ def test_file_upload(get_bearer_token, project_id="e4cc55c9-305d-478f-b285-96d43
 )
 def test_delete_file(get_bearer_token, file_dataset_id="", project_id="e4cc55c9-305d-478f-b285-96d436229fba"):
 	file_dataset_id = get_file_dataset_id(get_bearer_token, filename="Public Beta Launch Test Cases - requirements import structure.pdf", project_id="e4cc55c9-305d-478f-b285-96d436229fba")
-    # should check for success in dataset id within a certain amount of time
-    # report back how long it took to ingest a file
-    #   poll continuously until file status = "success"
-    #   if 600 seconds have gone by and it's not success, report error
-
-    # for jenkins: find out how to show line chart of ingestion time across runs? 
+    # for jenkins: show line chart of ingestion time across runs
 	delete_file(get_bearer_token, file_dataset_id, project_id="e4cc55c9-305d-478f-b285-96d436229fba")

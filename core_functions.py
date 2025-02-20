@@ -149,7 +149,7 @@ def upload_file_api(bearer_token, copilot_id,  platform="ea", filepath="/var/lib
 	response = requests.post(url, headers=headers, files=files)
 	end_time = time.time()
 	duration = end_time - start_time
-	print(f"API Response Time: {duration:.2f} seconds")
+	print(f"Upload File API Response Time: {duration:.2f} seconds")
 	# print("URL: "+url)
 	# print("Headers: "+str(response.request.headers))
 	# print("Files: "+str(files))
