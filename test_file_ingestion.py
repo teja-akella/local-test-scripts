@@ -20,7 +20,7 @@ from core_functions import upload_file_api
     indirect=True
 )
 def test_file_upload(get_bearer_token, project_id="e4cc55c9-305d-478f-b285-96d436229fba"):
-	upload_file_api(get_bearer_token, project_id, "ea", "/Users/yashdua/Documents/101GenAi_test_docs/Public Beta Launch Test Cases - requirements import structure.pdf")
+	upload_file_api(get_bearer_token, project_id, "ea", "/var/lib/jenkins/workspace/Public Beta Launch Test Cases - requirements import structure.pdf")
 
 @pytest.mark.parametrize(
     "get_bearer_token",
