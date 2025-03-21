@@ -17,7 +17,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
+SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
 
 
 @pytest.fixture(scope="session")
