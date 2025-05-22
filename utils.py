@@ -17,8 +17,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
-
 
 @pytest.fixture(scope="session")
 def setup():
@@ -116,14 +114,22 @@ def get_bearer_token(request):
 		return response.json()['token']
 
 def send_slack_message(message):
-	"""Send a message to slack via a webhook."""
-	payload = {"text": message}
-	response = requests.post(SLACK_WEBHOOK_URL, json=payload)
+    """Send a message to slack via a webhook."""
+    # Read credentials from yaml file
+    with open('../credentials.yaml', 'r') as file:
+        creds = yaml.safe_load(file)
+    
+    slack_webhook_url = creds.get('SLACK_WEBHOOK_URL')
+    if not slack_webhook_url:
+        raise ValueError("SLACK_WEBHOOK_URL not found in credentials.yaml")
 
-	if response.status_code == 200:
-		print("Message sent to Slack successfully.")
-	else:
-		print(f"Failed to send Slack message. Status Code: {response.status_code}, Response: {response.text}")
+    payload = {"text": message}
+    response = requests.post(slack_webhook_url, json=payload)
+
+    if response.status_code == 200:
+        print("Message sent to Slack successfully.")
+    else:
+        print(f"Failed to send Slack message. Status Code: {response.status_code}, Response: {response.text}")
 
 def create_and_add_new_user_to_org(get_bearer_token, email="testuser@gmail.com", first_name="TestUser", last_name="API", permission_group="member"):
 	with open('../credentials.yaml', 'r') as file:
@@ -203,6 +209,11 @@ def get_file_dataset_id(get_bearer_token, filename="Public Beta Launch Test Case
 			print("File finished uploading within the span of the last two API calls.")
 			file_id = i['id']
 			return i['id']
+	for i in response.json()['tables']:
+		if i['name'] == filename or filename in i['path']:
+			print("File finished uploading within the span of the last two API calls.")
+			file_id = i['id']
+			return i['id']
 	# Continue searching in "Processing" list if not found
 	if file_id == "":
 		for i in response.json()['processing']:
@@ -219,10 +230,17 @@ def get_file_dataset_id(get_bearer_token, filename="Public Beta Launch Test Case
 							print(f"Ingestion Time: {duration:.2f} seconds")
 							file_id = i['id']
 							return i['id']
+					for i in response.json()['tables']:
+						if i['name'] == filename or filename in i['path']:
+							end_time = time.time()
+							duration = end_time - start_time
+							print(f"Ingestion Time: {duration:.2f} seconds")
+							file_id = i['id']
+							return i['id']
 					end_time = time.time()
 					duration = end_time - start_time
 					print(f"Duration: {duration:.2f} seconds")
-					if duration > 600:
+					if duration > 60:
 						print("Document took more than 10 minutes to upload. Exiting.")
 						is_processing = False
 	print('Id not found.')
