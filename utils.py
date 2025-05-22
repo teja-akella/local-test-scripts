@@ -240,7 +240,7 @@ def get_file_dataset_id(get_bearer_token, filename="Public Beta Launch Test Case
 					end_time = time.time()
 					duration = end_time - start_time
 					print(f"Duration: {duration:.2f} seconds")
-					if duration > 60:
+					if duration > 600:
 						print("Document took more than 10 minutes to upload. Exiting.")
 						is_processing = False
 	print('Id not found.')
