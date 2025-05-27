@@ -55,7 +55,7 @@ def test_delete_file_pdf(get_bearer_token, filename="", file_dataset_id="", proj
 	indirect=True
 )
 def test_file_upload_csv(get_bearer_token, project_id="e4cc55c9-305d-478f-b285-96d436229fba"):
-	upload_file_api(get_bearer_token, project_id, "ea", "/Users/yashdua/Documents/101GenAi_test_docs/MSK_EVAL_results.csv")
+	upload_file_api(get_bearer_token, project_id, "ea", "/var/lib/jenkins/workspace/MSK_EVAL_results.csv")
 
 
 @pytest.mark.parametrize(
