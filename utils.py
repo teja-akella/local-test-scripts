@@ -35,7 +35,7 @@ def setup():
 
 def login(setup):
 	driver = setup
-	with open('../credentials.yaml', 'r') as file:
+	with open('config/credentials.yaml', 'r') as file:
 		creds = yaml.safe_load(file)
 
 	# Step 1: Navigate to the website
@@ -47,8 +47,8 @@ def login(setup):
 	password_field = driver.find_element(By.XPATH, "//input[@name='password']")  
 	
 	# Step 3: Input data into the fields
-	email_field.send_keys(creds['qa_mid_username'])
-	password_field.send_keys(creds['qa_mid_password'])
+	email_field.send_keys(creds['qa_low_username'])
+	password_field.send_keys(creds['qa_low_password'])
 
 	# Step 4: Submit the form
 	submit_button = wait.until(
@@ -81,10 +81,10 @@ def get_bearer_token(request):
 	client_side = params.get('client_side', True)
 	client_id = params.get('client_id', 'beta_101genai_client_id')
 	client_secret = params.get('client_secret', 'beta_101genai_client_secret')
-	username = params.get('username', 'test_root_username')
-	password = params.get('password', 'test_root_password')
+	username = params.get('username', 'qa_low_username')
+	password = params.get('password', 'qa_low_password')
 
-	with open('../credentials.yaml', 'r') as file:
+	with open('config/credentials.yaml', 'r') as file:
 		creds = yaml.safe_load(file)
 		if client_side:
 			data = {

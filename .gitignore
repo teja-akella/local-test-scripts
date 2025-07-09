@@ -3,9 +3,12 @@
 .env.*
 !.env.example  # keep a reference file if needed
 
-# Local configuration files
-config_local.py
-credentials.yaml
+# Ignore everything in config/
+config/*
+
+# But keep credentials.yaml
+!config/credentials.yaml
+
 
 # Python cache and compiled files
 __pycache__/

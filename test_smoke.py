@@ -117,7 +117,7 @@ def test_delete_copilot(setup):
 	driver = setup
 	wait = WebDriverWait(driver, timeout=10)
 
-	driver.get("https://test.app.101gen.ai/dashboard")
+	driver.get("http://localhost:5173/dashboard")
 
 	#time.sleep(10)
 	wait.until(
