@@ -11,7 +11,7 @@ from core_functions import upload_file_api
 	"get_bearer_token",
 	[
 		{
-			"url": "https://ea.api.101gen.ai/login",
+			"url": "http://localhost:5173/login",
 			"client_side": False,
 			"username": "qa_low_username",
 			"password": "qa_low_password",
@@ -27,7 +27,7 @@ def test_file_upload_pdf(get_bearer_token, project_id="e4cc55c9-305d-478f-b285-9
 	"get_bearer_token",
 	[
 		{
-			"url": "https://ea.api.101gen.ai/login",
+			"url": "http://localhost:5173/login",
 			"client_side": False,
 			"username": "qa_low_username",
 			"password": "qa_low_password",
@@ -46,7 +46,7 @@ def test_delete_file_pdf(get_bearer_token, filename="", file_dataset_id="", proj
 	"get_bearer_token",
 	[
 		{
-			"url": "https://ea.api.101gen.ai/login",
+			"url": "http://localhost:5173/login",
 			"client_side": False,
 			"username": "qa_low_username",
 			"password": "qa_low_password",
@@ -62,7 +62,7 @@ def test_file_upload_csv(get_bearer_token, project_id="e4cc55c9-305d-478f-b285-9
 	"get_bearer_token",
 	[
 		{
-			"url": "https://ea.api.101gen.ai/login",
+			"url": "http://localhost:5173/login",
 			"client_side": False,
 			"username": "qa_low_username",
 			"password": "qa_low_password",

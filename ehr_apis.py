@@ -6,7 +6,7 @@ import requests
 # DocumentReference Functions
 # =============================================
 
-def get_doc_reference_by_patient_id(bearer_token, patient_id, base_url="https://ea.api.101gen.ai/ehr"):
+def get_doc_reference_by_patient_id(bearer_token, patient_id, base_url="http://localhost:5173/ehr"):
     url = f"{base_url}/DocumentReference?patient={patient_id}"
     headers = {"Authorization": f"Bearer {bearer_token}"}
     
@@ -21,7 +21,7 @@ def get_doc_reference_by_patient_id(bearer_token, patient_id, base_url="https://
     return response.json()
 
 
-def get_doc_reference_by_patient_id_and_encounter_id(bearer_token, patient_id, encounter_id, base_url="https://ea.api.101gen.ai/ehr"):
+def get_doc_reference_by_patient_id_and_encounter_id(bearer_token, patient_id, encounter_id, base_url="http://localhost:5173/ehr"):
     url = f"{base_url}/DocumentReference?patient={patient_id}&encounter={encounter_id}"
     headers = {"Authorization": f"Bearer {bearer_token}"}
     
@@ -36,7 +36,7 @@ def get_doc_reference_by_patient_id_and_encounter_id(bearer_token, patient_id, e
     return response.json()
 
 
-def get_doc_reference_by_patient_id_encounter_id_and_date_range(bearer_token, patient_id, encounter_id, start_date, end_date, base_url="https://ea.api.101gen.ai/ehr"):
+def get_doc_reference_by_patient_id_encounter_id_and_date_range(bearer_token, patient_id, encounter_id, start_date, end_date, base_url="http://localhost:5173/ehr"):
     url = f"{base_url}/DocumentReference?patient={patient_id}&encounter={encounter_id}&date=ge{start_date}&date=le{end_date}"
     headers = {"Authorization": f"Bearer {bearer_token}"}
     
@@ -51,7 +51,7 @@ def get_doc_reference_by_patient_id_encounter_id_and_date_range(bearer_token, pa
     return response.json()
 
 
-def update_document_reference(bearer_token, document_id, data=None, base_url="https://ea.api.101gen.ai/update_ehr"):
+def update_document_reference(bearer_token, document_id, data=None, base_url="http://localhost:5173/update_ehr"):
     url = f"{base_url}/DocumentReference/{document_id}"
     headers = {"Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}
 
@@ -111,7 +111,7 @@ def update_document_reference(bearer_token, document_id, data=None, base_url="ht
     return response.json()
 
 
-def create_document_reference(bearer_token, data=None, base_url="https://ea.api.101gen.ai/add_ehr"):
+def create_document_reference(bearer_token, data=None, base_url="http://localhost:5173/add_ehr"):
     url = f"{base_url}/DocumentReference"
     headers = {"Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}
 
@@ -174,7 +174,7 @@ def create_document_reference(bearer_token, data=None, base_url="https://ea.api.
 # Patient Functions
 # =============================================
 
-def get_patient_by_id(bearer_token, patient_id, base_url="https://ea.api.101gen.ai/ehr"):
+def get_patient_by_id(bearer_token, patient_id, base_url="http://localhost:5173/ehr"):
     url = f"{base_url}/Patient/{patient_id}"
     headers = {"Authorization": f"Bearer {bearer_token}"}
     
@@ -189,7 +189,7 @@ def get_patient_by_id(bearer_token, patient_id, base_url="https://ea.api.101gen.
     return response.json()
 
 
-def update_patient(bearer_token, patient_id, data=None, base_url="https://ea.api.101gen.ai/update_ehr"):
+def update_patient(bearer_token, patient_id, data=None, base_url="http://localhost:5173/update_ehr"):
     url = f"{base_url}/Patient/{patient_id}"
     headers = {"Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}
 
@@ -231,7 +231,7 @@ def update_patient(bearer_token, patient_id, data=None, base_url="https://ea.api
     return response.json()
 
 
-def create_patient(bearer_token, data=None, base_url="https://ea.api.101gen.ai/add_ehr"):
+def create_patient(bearer_token, data=None, base_url="http://localhost:5173/add_ehr"):
     url = f"{base_url}/Patient"
     headers = {"Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}
 

@@ -39,7 +39,7 @@ def login(setup):
 		creds = yaml.safe_load(file)
 
 	# Step 1: Navigate to the website
-	driver.get("https://test.app.101gen.ai/login")  
+	driver.get("http://localhost:5173/login")  
 	wait = WebDriverWait(driver, timeout=30)
 	
 	# Step 2: Locate and interact with the form fields
@@ -56,7 +56,7 @@ def login(setup):
 	)
 	submit_button.click()
 	wait.until(EC.presence_of_element_located((By.XPATH, "//div[text()='Welcome to 101GenAI!']")))
-	assert driver.current_url == "https://test.app.101gen.ai/dashboard", "Did not reach the correct URL."
+	assert driver.current_url == "http://localhost:5173/dashboard", "Did not reach the correct URL."
 	time.sleep(5)
 
 def open_copilot(setup, name='Test Copilot'):
@@ -113,79 +113,79 @@ def get_bearer_token(request):
 	else:	
 		return response.json()['token']
 
-def send_slack_message(message):
-    """Send a message to slack via a webhook."""
-    # Read credentials from yaml file
-    with open('../credentials.yaml', 'r') as file:
-        creds = yaml.safe_load(file)
+# def send_slack_message(message):
+#     """Send a message to slack via a webhook."""
+#     # Read credentials from yaml file
+#     with open('../credentials.yaml', 'r') as file:
+#         creds = yaml.safe_load(file)
     
-    slack_webhook_url = creds.get('SLACK_WEBHOOK_URL')
-    if not slack_webhook_url:
-        raise ValueError("SLACK_WEBHOOK_URL not found in credentials.yaml")
+#     slack_webhook_url = creds.get('SLACK_WEBHOOK_URL')
+#     if not slack_webhook_url:
+#         raise ValueError("SLACK_WEBHOOK_URL not found in credentials.yaml")
 
-    payload = {"text": message}
-    response = requests.post(slack_webhook_url, json=payload)
+#     payload = {"text": message}
+#     response = requests.post(slack_webhook_url, json=payload)
 
-    if response.status_code == 200:
-        print("Message sent to Slack successfully.")
-    else:
-        print(f"Failed to send Slack message. Status Code: {response.status_code}, Response: {response.text}")
+#     if response.status_code == 200:
+#         print("Message sent to Slack successfully.")
+#     else:
+#         print(f"Failed to send Slack message. Status Code: {response.status_code}, Response: {response.text}")
 
-def create_and_add_new_user_to_org(get_bearer_token, email="testuser@gmail.com", first_name="TestUser", last_name="API", permission_group="member"):
-	with open('../credentials.yaml', 'r') as file:
-		creds = yaml.safe_load(file)
+# def create_and_add_new_user_to_org(get_bearer_token, email="testuser@gmail.com", first_name="TestUser", last_name="API", permission_group="member"):
+# 	with open('../credentials.yaml', 'r') as file:
+# 		creds = yaml.safe_load(file)
 
-	test_org_id = creds['ea_101genai_org_id']
+# 	test_org_id = creds['101genai_org_id']
+# 	bearer_token = get_bearer_token
+
+# 	#url = "https://ea.api.101gen.ai/org/user/create"
+
+# 	headers = {
+# 		"Content-Type": "application/json",
+# 		"Authorization": f"Bearer {bearer_token}"
+# 	}
+
+# 	# Payload
+# 	data = {
+# 	    "org_id": test_org_id, 
+# 	    "email": email,
+# 	    "first_name": first_name,
+# 	    "last_name": last_name,
+# 	    "permission_group": permission_group
+# 	}
+
+# 	print("Creating and adding new user to org..")
+# 	response = requests.post(url, json=data, headers=headers)
+# 	assert not 400 <= response.status_code <= 499, (f"Client error: {response.status_code} - {response.text}")
+# 	assert not 500 <= response.status_code <= 599, (f"Server error: {response.status_code} - {response.text}")
+# 	print("User created and added!")
+
+# def create_new_org(get_bearer_token, name="Test Org 1", domain="test14.com"):
+# 	bearer_token = get_bearer_token
+
+# 	url = "https://ea.api.101gen.ai/org"
+
+# 	headers = {
+# 		"Content-Type": "application/json",
+# 		"Authorization": f"Bearer {bearer_token}"
+# 	}
+
+# 	# Payload
+# 	data = {
+# 	    "name": name,
+# 		"domain": domain
+# 	}
+
+# 	print("Creating new org..")
+# 	response = requests.post(url, json=data, headers=headers)
+# 	assert not 400 <= response.status_code <= 499, (f"Client error: {response.status_code} - {response.text}")
+# 	assert not 500 <= response.status_code <= 599, (f"Server error: {response.status_code} - {response.text}")
+# 	print("Org created!")
+
+def get_file_dataset_id(get_bearer_token, filename="Public Beta Launch Test Cases - requirements import structure.pdf", project_id="1e780036-83c2-4134-b63c-639853ae10d3"):
 	bearer_token = get_bearer_token
 
-	url = "https://ea.api.101gen.ai/org/user/create"
-
-	headers = {
-		"Content-Type": "application/json",
-		"Authorization": f"Bearer {bearer_token}"
-	}
-
-	# Payload
-	data = {
-	    "org_id": test_org_id, 
-	    "email": email,
-	    "first_name": first_name,
-	    "last_name": last_name,
-	    "permission_group": permission_group
-	}
-
-	print("Creating and adding new user to org..")
-	response = requests.post(url, json=data, headers=headers)
-	assert not 400 <= response.status_code <= 499, (f"Client error: {response.status_code} - {response.text}")
-	assert not 500 <= response.status_code <= 599, (f"Server error: {response.status_code} - {response.text}")
-	print("User created and added!")
-
-def create_new_org(get_bearer_token, name="Test Org 1", domain="test14.com"):
-	bearer_token = get_bearer_token
-
-	url = "https://ea.api.101gen.ai/org"
-
-	headers = {
-		"Content-Type": "application/json",
-		"Authorization": f"Bearer {bearer_token}"
-	}
-
-	# Payload
-	data = {
-	    "name": name,
-		"domain": domain
-	}
-
-	print("Creating new org..")
-	response = requests.post(url, json=data, headers=headers)
-	assert not 400 <= response.status_code <= 499, (f"Client error: {response.status_code} - {response.text}")
-	assert not 500 <= response.status_code <= 599, (f"Server error: {response.status_code} - {response.text}")
-	print("Org created!")
-
-def get_file_dataset_id(get_bearer_token, filename="Public Beta Launch Test Cases - requirements import structure.pdf", project_id="e4cc55c9-305d-478f-b285-96d436229fba"):
-	bearer_token = get_bearer_token
-
-	url = "https://ea.api.101gen.ai/copilots/"+project_id+"/datasets"
+	url = "http://localhost:5173/copilots/"+project_id+"/datasets"
 
 	headers = {
 		"Authorization": f"Bearer {bearer_token}"
@@ -246,13 +246,13 @@ def get_file_dataset_id(get_bearer_token, filename="Public Beta Launch Test Case
 	print('Id not found.')
 	return None
 
-def delete_file(get_bearer_token, file_dataset_id="", project_id="e4cc55c9-305d-478f-b285-96d436229fba"):
+def delete_file(get_bearer_token, file_dataset_id="", project_id="1e780036-83c2-4134-b63c-639853ae10d3"):
 	# upload file
 
 	#time.sleep(5)
 	bearer_token = get_bearer_token
 	
-	url = "https://ea.api.101gen.ai/copilots/"+project_id+"/datasets"
+	url = "http://localhost:5173/copilots/"+project_id+"/datasets"
 
 	headers = {
 		"Content-Type": "application/json",
@@ -260,7 +260,7 @@ def delete_file(get_bearer_token, file_dataset_id="", project_id="e4cc55c9-305d-
 	}
 
 	if file_dataset_id is None:
-		file_dataset_id = get_file_dataset_id(get_bearer_token, filename="2024-02-23_yk_saxena_medical_report_handwritten_report.pdf", project_id="e4cc55c9-305d-478f-b285-96d436229fba")
+		file_dataset_id = get_file_dataset_id(get_bearer_token, filename="2024-02-23_yk_saxena_medical_report_handwritten_report.pdf", project_id="1e780036-83c2-4134-b63c-639853ae10d3")
 
 	print("file_dataset_id: "+str(file_dataset_id))
 	data = {

@@ -57,7 +57,7 @@ from ehr_apis import (
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -74,7 +74,7 @@ def test_get_doc_reference_by_patient_id(get_bearer_token, patient_id='1'):
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -91,7 +91,7 @@ def test_get_doc_reference_by_patient_id_and_encounter_id(get_bearer_token, pati
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -108,7 +108,7 @@ def test_get_doc_reference_by_patient_id_encounter_id_and_date_range(get_bearer_
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -199,7 +199,7 @@ def test_update_document_reference_and_verify(get_bearer_token, document_id='120
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -216,7 +216,7 @@ def test_get_patient_by_id(get_bearer_token, patient_id='1203165'):
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -285,7 +285,7 @@ def test_update_patient_and_verify(get_bearer_token, patient_id='1203165'):
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -302,7 +302,7 @@ def test_get_encounter_by_id(get_bearer_token, encounter_id='1203252'):
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -336,7 +336,7 @@ def test_get_encounter_by_patient_id_and_date_range(get_bearer_token, patient_id
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -431,7 +431,7 @@ def test_update_encounter_and_verify(get_bearer_token, encounter_id='1203252'):
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -448,7 +448,7 @@ def test_get_medication_request_by_patient_id(get_bearer_token, patient_id='1'):
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -469,7 +469,7 @@ def test_get_medication_request_by_id(get_bearer_token, medication_request_id='1
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -486,7 +486,7 @@ def test_get_condition_by_patient_id(get_bearer_token, patient_id='1'):
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -503,7 +503,7 @@ def test_get_condition_by_patient_id_and_encounter_id(get_bearer_token, patient_
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -604,7 +604,7 @@ def test_update_condition_and_verify(get_bearer_token, condition_id='1210331'):
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -621,7 +621,7 @@ def test_get_observation_by_id(get_bearer_token, observation_id='1203308'):
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -638,7 +638,7 @@ def test_get_observation_by_patient_id(get_bearer_token, patient_id='1'):
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -655,7 +655,7 @@ def test_get_observation_by_patient_id_and_encounter_id(get_bearer_token, patien
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",
@@ -749,7 +749,7 @@ def test_update_observation_and_verify(get_bearer_token, observation_id='1203308
     "get_bearer_token",
     [
         {
-            "url": "https://ea.api.101gen.ai/login",
+            "url": "http://localhost:5173/login",
             "client_side": False,
             "username": "qa_low_username",
             "password": "qa_low_password",

@@ -1,0 +1,22 @@
+# Environment variable files
+.env
+.env.*
+!.env.example  # keep a reference file if needed
+
+# Local configuration files
+config_local.py
+credentials.yaml
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment folders
+venv/
+env/
+
+# IDE/editor config
+.vscode/
+.idea/
